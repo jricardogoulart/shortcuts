@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Painel de Atividades</title>
+</head>
+
+<body>
+
+    <nav>
+        <div class="navbar">
+            <a href="#referencias" onclick="showContent('referencias')">Referências</a>
+            <a href="#pdf" onclick="showContent('pdf')">PDF</a>
+            <a href="#orcamentos" onclick="showContent('orcamentos')">Orçamentos</a>
+        </div>
+    </nav>
+
+    <div id="referencias" class="content active">
+        <h2>Referências</h2>
+        <div class="container">
+            <h1>Gerador de Referências</h1>
+            <p>Digite suas referências no formato especificado e clique em "Gerar Referências".</p>
+
+            <textarea id="referencesInput" rows="10" placeholder="Exemplo: MX-137/A (37-43)"></textarea><br><br>
+            <button onclick="generateReferences()">Gerar Referências</button>
+
+            <h2>Referências Geradas:</h2>
+            <div id="output" class="reference"></div>
+            <button class="copy-btn" onclick="copyToClipboard()">Copiar Todas as Referências</button>
+        </div>
+    </div>
+
+    <div id="pdf" class="content">
+        <h2>PDF</h2>
+        <form id="pdfForm">
+            <div class="form-group">
+                <label for="pdfFiles">Selecione os PDFs para mesclar:</label>
+                <input type="file" id="pdfFiles" class="form-control-file" multiple accept="application/pdf">
+            </div>
+            <button type="submit" id="mergeButton">Mesclar PDFs</button>
+        </form>
+        <div id="result">
+            <!-- Link para o PDF mesclado será exibido aqui -->
+        </div>
+    </div>
+
+    <div id="orcamentos" class="content">
+        <h2>Orçamentos</h2>
+        <p>Conteúdo sobre Orçamentos.</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+
+    <script>
+        // Mostrando Conteúdo de acordo com a seleção
+        function showContent(tabName) {
+            var contents = document.getElementsByClassName('content');
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove('active');
+            }
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        //Aba de Referências 
+
+        function generateReferences() {
+            const input = document.getElementById("referencesInput").value.toUpperCase();
+            const lines = input.split("\n");
+            let allReferences = '';
+            let previousReference = '';
+
+            lines.forEach(line => {
+                const match = line.match(/(.+)\s\((\d+)-(\d+)\)/);
+                if (match) {
+                    const reference = match[1];
+                    const start = parseInt(match[2]);
+                    const end = parseInt(match[3]);
+
+                    if (start <= end) {
+                        if (allReferences && previousReference !== reference) {
+                            allReferences += '\n\n'; // Adiciona duas quebras de linha entre diferentes referências
+                        }
+
+                        for (let i = start; i <= end; i++) {
+                            allReferences += `${reference} - ${i}\n`;
+                        }
+
+                        previousReference = reference;
+                    }
+                }
+            });
+
+            document.getElementById("output").textContent = allReferences.trim();
+        }
+
+        function copyToClipboard() {
+            const text = document.getElementById("output").textContent;
+            const textarea = document.createElement("textarea");
+            textarea.value = text.replace(/\n/g, '\r\n'); // Preserva as quebras de linha ao copiar
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+            alert("Todas as referências foram copiadas!");
+        }
+
+        // Aba de Juntar os PDF's
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+body {
+    font-family: Sora, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.navbar {
+    display: flex;
+    background-color: #333;
+    justify-content: space-around;
+    padding: 14px 0;
+}
+
+.navbar a {
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navbar a:hover {
+    background-color: #575757;
+}
+
+.content {
+    padding: 20px;
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+
+
+#main-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+#main-container h1 {
+    text-align: center;
+    color: #333;
+}
+
+#pdfForm {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.form-group input[type="file"] {
+    display: block;
+    width: 100%;
+}
+
+#mergeButton {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+}
