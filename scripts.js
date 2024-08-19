@@ -1,6 +1,6 @@
 // scripts.js
 
-// Mostrando Conteúdo de acordo com a seleção
+// Função para exibir o conteúdo das abas
 function showContent(tabName) {
     var contents = document.getElementsByClassName('content');
     for (var i = 0; i < contents.length; i++) {
@@ -9,7 +9,7 @@ function showContent(tabName) {
     document.getElementById(tabName).classList.add('active');
 }
 
-// Aba de Referências 
+// Aba de Referências
 function generateReferences() {
     const input = document.getElementById("referencesInput").value.toUpperCase();
     const lines = input.split("\n");
@@ -51,36 +51,6 @@ function copyToClipboard() {
     alert("Todas as referências foram copiadas!");
 }
 
-// Aba de Juntar os PDF's
-document.getElementById('pdfForm').addEventListener('submit', async function (event) {
-    event.preventDefault();
-
-    const input = document.getElementById('pdfFiles');
-    const files = input.files;
-
-    if (files.length === 0) {
-        alert('Por favor, selecione pelo menos um arquivo PDF.');
-        return;
-    }
-
-    const pdfDoc = await PDFLib.PDFDocument.create();
-
-    for (const file of files) {
-        const arrayBuffer = await file.arrayBuffer();
-        const loadedPdf = await PDFLib.PDFDocument.load(arrayBuffer);
-        const copiedPages = await pdfDoc.copyPages(loadedPdf, loadedPdf.getPageIndices());
-        copiedPages.forEach((page) => pdfDoc.addPage(page));
-    }
-
-    const pdfBytes = await pdfDoc.save();
-    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-    const url = URL.createObjectURL(blob);
-
-    const resultDiv = document.getElementById('result');
-    resultDiv.innerHTML = `<a href="${url}" download="mesclado.pdf" class="btn btn-success btn-block">Baixar PDF Mesclado</a>`;
-});
-
-// Aba Orçamentos
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('gerarPDF').addEventListener('click', gerarPDF);
 });
@@ -89,7 +59,6 @@ function gerarPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    doc.setFont('Inter');
     doc.setFontSize(12);
 
     // Captura dos dados do formulário
@@ -125,7 +94,7 @@ function gerarPDF() {
         margin: { left: startX },
         theme: 'grid',
         headStyles: { fillColor: [0, 0, 0] },
-        styles: { halign: 'center', font: 'Inter' },
+        styles: { halign: 'center' },
     });
 
     doc.text(`Valor Total Desenvolvimento das Matrizes: R$ ${valorTotal.toFixed(2)}`, startX, doc.autoTable.previous.finalY + 20);
@@ -138,3 +107,5 @@ function gerarPDF() {
     // Gerando o PDF
     doc.save(`Ficha_Orcamentaria_${nomeCliente}.pdf`);
 }
+
+

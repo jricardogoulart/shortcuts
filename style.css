@@ -14,12 +14,15 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    max-width: 400px; /* Largura máxima do formulário */
+    margin: 0 auto;
 }
 
 form label,
 form input,
 form button {
-    width: 80%; /* Para centralizar os elementos */
+    width: 100%; /* Largura total dos elementos do formulário */
     margin: 5px 0;
 }
 
@@ -31,6 +34,7 @@ button {
     font-family: 'Inter', sans-serif;
     font-size: 16px;
 }
+
 /* Estilo para a barra de navegação */
 .navbar {
     display: flex;
