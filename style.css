@@ -1,76 +1,136 @@
 body {
-    font-family: Sora, sans-serif;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
 
+.content {
+    max-width: 210mm; /* Largura máxima para A4 */
+    margin: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form label,
+form input,
+form button {
+    width: 80%; /* Para centralizar os elementos */
+    margin: 5px 0;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+button {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+/* Estilo para a barra de navegação */
 .navbar {
     display: flex;
-    background-color: #333;
     justify-content: space-around;
-    padding: 14px 0;
+    background-color: #333;
+    padding: 10px;
 }
 
 .navbar a {
     color: white;
-    text-align: center;
-    padding: 14px 20px;
     text-decoration: none;
-    font-size: 18px;
+    padding: 10px 20px;
+    text-align: center;
 }
 
 .navbar a:hover {
-    background-color: #575757;
+    background-color: #ddd;
+    color: black;
 }
 
+/* Estilo para o conteúdo */
 .content {
-    padding: 20px;
     display: none;
-}
-
-.active {
-    display: block;
-}
-
-
-
-#main-container {
-    background-color: #fff;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 500px;
 }
 
-#main-container h1 {
-    text-align: center;
-    color: #333;
-}
-
-#pdfForm {
-    margin-top: 20px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
+.content.active {
     display: block;
-    margin-bottom: 5px;
-    color: #555;
 }
 
-.form-group input[type="file"] {
-    display: block;
-    width: 100%;
+.container {
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-#mergeButton {
+textarea {
     width: 100%;
     padding: 10px;
-    background-color: #28a745;
+    margin-bottom: 10px;
+}
+
+.reference {
+    white-space: pre-wrap;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.copy-btn {
+    background-color: #4CAF50;
+    color: white;
+    margin-top: 16px;
+    padding: 10px;
     border: none;
+    cursor: pointer;
+}
+
+.copy-btn:hover {
+    background-color: #1f6823;
+}
+
+/* Centralizando o formulário */
+#orcamentoForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+/* Estilizando os labels e inputs */
+#orcamentoForm label {
+    margin-bottom: 5px;
+    align-self: flex-start;
+    font-weight: bold;
+}
+
+#orcamentoForm input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Estilo para o botão */
+#orcamentoForm button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#orcamentoForm button:hover {
+    background-color: #45a049;
 }
