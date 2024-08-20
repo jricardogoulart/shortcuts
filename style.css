@@ -138,3 +138,39 @@ textarea {
 #orcamentoForm button:hover {
     background-color: #45a049;
 }
+
+.orcamento-detalhes {
+    margin-top: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.orcamento-detalhes table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.orcamento-detalhes th, .orcamento-detalhes td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: center;
+}
+
+.orcamento-detalhes th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.orcamento-detalhes td {
+    font-size: 14px;
+}
+
+.orcamento-detalhes p {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.orcamento-detalhes .observacao {
+    margin-top: 20px;
+    font-style: italic;
+}

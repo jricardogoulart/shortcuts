@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <title>Painel de Atividades</title>
 </head>
+
 <body>
 
     <nav>
@@ -17,7 +19,7 @@
         </div>
     </nav>
 
-    <div id="referencias" class="content active">
+    <section id="referencias" class="content active">
         <h2>Referências</h2>
         <div class="container">
             <h1>Gerador de Referências</h1>
@@ -30,23 +32,19 @@
             <div id="output" class="reference"></div>
             <button class="copy-btn" onclick="copyToClipboard()">Copiar Todas as Referências</button>
         </div>
-    </div>
+    </section>
 
-    <div id="pdf" class="content">
+    <section id="pdf" class="content">
         <h2>PDF</h2>
         <form id="pdfForm">
-            <div class="form-group">
-                <label for="pdfFiles">Selecione os PDFs para mesclar:</label>
-                <input type="file" id="pdfFiles" class="form-control-file" multiple accept="application/pdf">
-            </div>
+            <label for="pdfFiles">Selecione os PDFs para mesclar:</label>
+            <input type="file" id="pdfFiles" multiple accept="application/pdf">
             <button type="submit" id="mergeButton">Mesclar PDFs</button>
         </form>
-        <div id="result">
-            <!-- Link para o PDF mesclado será exibido aqui -->
-        </div>
-    </div>
+        <div id="result"></div>
+    </section>
 
-    <div id="orcamentos" class="content">
+    <section id="orcamentos" class="content">
         <h1>Ficha Orçamentária</h1>
         <form id="orcamentoForm">
             <label for="nomeCliente">Nome do Cliente:</label>
@@ -72,11 +70,14 @@
 
             <button type="button" id="gerarPDF">Gerar PDF</button>
         </form>
-    </div>
+        <div id="orcamentoDetalhes"></div>
+        <div id="pdfOutput" style="margin-top: 20px;"></div>
+    </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <script src="scripts.js"></script>
 </body>
+
 </html>
