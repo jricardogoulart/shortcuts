@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <title>Painel de Atividades</title>
 </head>
 
@@ -18,7 +19,7 @@
         </div>
     </nav>
 
-    <div id="referencias" class="content active">
+    <section id="referencias" class="content active">
         <h2>Referências</h2>
         <div class="container">
             <h1>Gerador de Referências</h1>
@@ -31,85 +32,52 @@
             <div id="output" class="reference"></div>
             <button class="copy-btn" onclick="copyToClipboard()">Copiar Todas as Referências</button>
         </div>
-    </div>
+    </section>
 
-    <div id="pdf" class="content">
+    <section id="pdf" class="content">
         <h2>PDF</h2>
         <form id="pdfForm">
-            <div class="form-group">
-                <label for="pdfFiles">Selecione os PDFs para mesclar:</label>
-                <input type="file" id="pdfFiles" class="form-control-file" multiple accept="application/pdf">
-            </div>
+            <label for="pdfFiles">Selecione os PDFs para mesclar:</label>
+            <input type="file" id="pdfFiles" multiple accept="application/pdf">
             <button type="submit" id="mergeButton">Mesclar PDFs</button>
         </form>
-        <div id="result">
-            <!-- Link para o PDF mesclado será exibido aqui -->
-        </div>
-    </div>
+        <div id="result"></div>
+    </section>
 
-    <div id="orcamentos" class="content">
-        <h2>Orçamentos</h2>
-        <p>Conteúdo sobre Orçamentos.</p>
-    </div>
+    <section id="orcamentos" class="content">
+        <h1>Ficha Orçamentária</h1>
+        <form id="orcamentoForm">
+            <label for="nomeCliente">Nome do Cliente:</label>
+            <input type="text" id="nomeCliente" required>
+
+            <label for="descricao">Descrição do Serviço:</label>
+            <input type="text" id="descricao" required>
+
+            <label for="qtdMatrizes">Quantidade de Matrizes:</label>
+            <input type="number" id="qtdMatrizes" required>
+
+            <label for="valorMatriz">Valor Unitário da Matriz:</label>
+            <input type="number" id="valorMatriz" required>
+
+            <label for="qtdGravacaoFotolito">Quantidade de Gravações + Fotolitos:</label>
+            <input type="number" id="qtdGravacaoFotolito" required>
+
+            <label for="valorGravacaoFotolito">Valor Unitário da Gravação + Fotolito:</label>
+            <input type="number" id="valorGravacaoFotolito" required>
+
+            <label for="custoMaoDeObra">Custo da Mão de Obra por Unidade:</label>
+            <input type="number" id="custoMaoDeObra" required>
+
+            <button type="button" id="gerarPDF">Gerar PDF</button>
+        </form>
+        <div id="orcamentoDetalhes"></div>
+        <div id="pdfOutput" style="margin-top: 20px;"></div>
+    </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-
-    <script>
-        // Mostrando Conteúdo de acordo com a seleção
-        function showContent(tabName) {
-            var contents = document.getElementsByClassName('content');
-            for (var i = 0; i < contents.length; i++) {
-                contents[i].classList.remove('active');
-            }
-            document.getElementById(tabName).classList.add('active');
-        }
-
-        //Aba de Referências 
-
-        function generateReferences() {
-            const input = document.getElementById("referencesInput").value.toUpperCase();
-            const lines = input.split("\n");
-            let allReferences = '';
-            let previousReference = '';
-
-            lines.forEach(line => {
-                const match = line.match(/(.+)\s\((\d+)-(\d+)\)/);
-                if (match) {
-                    const reference = match[1];
-                    const start = parseInt(match[2]);
-                    const end = parseInt(match[3]);
-
-                    if (start <= end) {
-                        if (allReferences && previousReference !== reference) {
-                            allReferences += '\n\n'; // Adiciona duas quebras de linha entre diferentes referências
-                        }
-
-                        for (let i = start; i <= end; i++) {
-                            allReferences += `${reference} - ${i}\n`;
-                        }
-
-                        previousReference = reference;
-                    }
-                }
-            });
-
-            document.getElementById("output").textContent = allReferences.trim();
-        }
-
-        function copyToClipboard() {
-            const text = document.getElementById("output").textContent;
-            const textarea = document.createElement("textarea");
-            textarea.value = text.replace(/\n/g, '\r\n'); // Preserva as quebras de linha ao copiar
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand("copy");
-            document.body.removeChild(textarea);
-            alert("Todas as referências foram copiadas!");
-        }
-
-        // Aba de Juntar os PDF's
-    </script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="scripts.js"></script>
 </body>
 
 </html>
