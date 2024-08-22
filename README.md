@@ -23,7 +23,7 @@ This project is a static web page, so there is no need for a server or database.
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/yourusername/shortcuts.git
+    git clone https://github.com/jricardogoulart/shortcuts.git
     cd shortcuts
     ```
 
