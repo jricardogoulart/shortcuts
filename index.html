@@ -43,37 +43,50 @@
         </form>
         <div id="result"></div>
     </section>
-
-    <section id="orcamentos" class="content">
-        <h1>Ficha Orçamentária</h1>
-        <form id="orcamentoForm">
-            <label for="nomeCliente">Nome do Cliente:</label>
-            <input type="text" id="nomeCliente" required>
-
-            <label for="descricao">Descrição do Serviço:</label>
-            <input type="text" id="descricao" required>
-
-            <label for="qtdMatrizes">Quantidade de Matrizes:</label>
-            <input type="number" id="qtdMatrizes" required>
-
-            <label for="valorMatriz">Valor Unitário da Matriz:</label>
-            <input type="number" id="valorMatriz" required>
-
-            <label for="qtdGravacaoFotolito">Quantidade de Gravações + Fotolitos:</label>
-            <input type="number" id="qtdGravacaoFotolito" required>
-
-            <label for="valorGravacaoFotolito">Valor Unitário da Gravação + Fotolito:</label>
-            <input type="number" id="valorGravacaoFotolito" required>
-
-            <label for="custoMaoDeObra">Custo da Mão de Obra por Unidade:</label>
-            <input type="number" id="custoMaoDeObra" required>
-
-            <button type="button" id="gerarPDF">Gerar PDF</button>
-        </form>
-        <div id="orcamentoDetalhes"></div>
-        <div id="pdfOutput" style="margin-top: 20px;"></div>
-    </section>
-
+<section id="orcamentos" class="content">
+    <h1>Ficha Orçamentária</h1>
+    <form id="orcamentoForm">
+        <div class="duas-colunas">
+            <div class="form-group">
+                <label for="nomeCliente">Nome do Cliente:</label>
+                <input type="text" id="nomeCliente" required>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição do Serviço:</label>
+                <input type="text" id="descricao" required>
+            </div>
+        </div>
+        <div class="duas-colunas">
+            <div class="form-group">
+                <label for="qtdMatrizes">Quantidade de Matrizes:</label>
+                <input type="number" id="qtdMatrizes" required>
+            </div>
+            <div class="form-group">
+                <label for="valorMatriz">Valor Unitário da Matriz:</label>
+                <input type="number" id="valorMatriz" required>
+            </div>
+        </div>
+        <div class="duas-colunas">
+            <div class="form-group">
+                <label for="qtdGravacaoFotolito">Quantidade de Gravações + Fotolitos:</label>
+                <input type="number" id="qtdGravacaoFotolito" required>
+            </div>
+            <div class="form-group">
+                <label for="valorGravacaoFotolito">Valor Unitário da Gravação + Fotolito:</label>
+                <input type="number" id="valorGravacaoFotolito" required>
+            </div>
+        </div>
+        <div class="duas-colunas">
+            <div class="form-group">
+                <label for="custoMaoDeObra">Custo da Mão de Obra por Unidade:</label>
+                <input type="number" id="custoMaoDeObra" required>
+            </div>
+        </div>
+        <button type="button" id="gerarPDF">Gerar PDF</button>
+    </form>
+    <div id="orcamentoDetalhes"></div>
+    <div id="pdfOutput" style="margin-top: 15px;"></div>
+</section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
