@@ -1,8 +1,19 @@
-// scripts.js
+// Função para mostrar a seção correta
+function showContent(contentId) {
+    // Esconde todas as seções
+    const contents = document.querySelectorAll('.content');
+    contents.forEach(content => {
+        content.classList.remove('active');
+    });
 
+    // Mostra a seção selecionada
+    const selectedContent = document.getElementById(contentId);
+    if (selectedContent) {
+        selectedContent.classList.add('active');
+    }
+}
 
-
-// Aba de Referências
+// Funções para Referências
 function generateReferences() {
     const input = document.getElementById("referencesInput").value.toUpperCase();
     const lines = input.split("\n");
@@ -44,8 +55,7 @@ function copyToClipboard() {
     alert("Todas as referências foram copiadas!");
 }
 
-// Capturar parâmetros do formulário
-
+// Capturar parâmetros do formulário e gerar PDF para orçamentos
 function getFormData() {
     return {
         nomeCliente: document.getElementById('nomeCliente').value,
@@ -100,62 +110,46 @@ function exibirOrcamento() {
     document.getElementById('orcamentoDetalhes').innerHTML = detalhesOrcamento;
 }
 
-document.getElementById('gerarPDF').addEventListener('click', function() {
-    exibirOrcamento();
-    gerarPDF();
-});
 function gerarPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    const nomeCliente = document.getElementById('nomeCliente').value;
-    const descricao = document.getElementById('descricao').value;
-    const qtdMatrizes = parseInt(document.getElementById('qtdMatrizes').value);
-    const valorMatriz = parseFloat(document.getElementById('valorMatriz').value);
-    const qtdGravacaoFotolito = parseInt(document.getElementById('qtdGravacaoFotolito').value);
-    const valorGravacaoFotolito = parseFloat(document.getElementById('valorGravacaoFotolito').value);
-    const custoMaoDeObra = parseFloat(document.getElementById('custoMaoDeObra').value);
+    const { nomeCliente, descricao, qtdMatrizes, valorMatriz, qtdGravacaoFotolito, valorGravacaoFotolito, custoMaoDeObra } = getFormData();
 
     const valorTotalMatrizes = qtdMatrizes * valorMatriz;
     const valorTotalGravacaoFotolito = qtdGravacaoFotolito * valorGravacaoFotolito;
     const valorTotal = valorTotalMatrizes + valorTotalGravacaoFotolito;
 
-    // Configurando o PDF
-    doc.setFontSize(16);
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const startX = (pageWidth - 180) / 2;
+    doc.text(`Nome do Cliente: ${nomeCliente}`, 10, 10);
+    doc.text(`Descrição: ${descricao}`, 10, 20);
+    doc.text(`Valor Total Matrizes: R$ ${valorTotalMatrizes.toFixed(2)}`, 10, 30);
+    doc.text(`Valor Total Gravação + Fotolito: R$ ${valorTotalGravacaoFotolito.toFixed(2)}`, 10, 40);
+    doc.text(`Valor Total: R$ ${valorTotal.toFixed(2)}`, 10, 50);
 
-    doc.text('Ficha Orçamentária', pageWidth / 2, 20, null, null, 'center');
-    doc.setFontSize(11);
-    doc.text(`Nome Cliente: ${nomeCliente}`, startX, 40);
-    doc.text(`Descrição: ${descricao}`, startX, 50);
-    doc.text(`Quantidade De Matrizes: ${qtdMatrizes}`, startX, 60);
+    doc.save('orcamento.pdf');
+}
 
-    doc.autoTable({
-        head: [['Item', 'Valor Unitário', 'Quantidade', 'Valor Total']],
-        body: [
-            ['Matriz Serigráfica', `R$ ${valorMatriz.toFixed(2)}`, `${qtdMatrizes}`, `R$ ${valorTotalMatrizes.toFixed(2)}`],
-            ['Gravação + Fotolito', `R$ ${valorGravacaoFotolito.toFixed(2)}`, `${qtdGravacaoFotolito}`, `R$ ${valorTotalGravacaoFotolito.toFixed(2)}`],
-        ],
-        startY: 70,
-        margin: { left: startX },
-        theme: 'grid',
-        headStyles: { fillColor: [0, 0, 0] },
-        styles: { halign: 'center' },
-    });
+// Mesclagem de PDFs
+document.getElementById('pdfForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-    doc.text(`Valor Total Desenvolvimento das Matrizes: R$ ${valorTotal.toFixed(2)}`, startX, doc.autoTable.previous.finalY + 20);
-    doc.text(`Custo da Mão de Obra por Unidade: R$ ${custoMaoDeObra.toFixed(2)}`, startX, doc.autoTable.previous.finalY + 30);
+    const files = document.getElementById('pdfFiles').files;
+    const pdfDoc = await PDFLib.PDFDocument.create();
 
-    doc.setFontSize(11);
-    doc.text(`"Observação: Ao aprovar o orçamento, o cliente é responsável por contribuir com \n 50% do valor total para o desenvolvimento das matrizes."`, startX, doc.autoTable.previous.finalY + 50);
-    doc.text(`50% de R$ ${valorTotal.toFixed(2)} = R$ ${(valorTotal / 2).toFixed(2)}`, startX, doc.autoTable.previous.finalY + 60);
+    for (const file of files) {
+        const fileArrayBuffer = await file.arrayBuffer();
+        const existingPdfDoc = await PDFLib.PDFDocument.load(fileArrayBuffer);
+        const copiedPages = await pdfDoc.copyPages(existingPdfDoc, existingPdfDoc.getPageIndices());
+        copiedPages.forEach(page => pdfDoc.addPage(page));
+    }
 
-    // Exibindo o PDF gerado na tela
-    const pdfOutput = document.getElementById('pdfOutput');
+    const pdfBytes = await pdfDoc.save();
+    
+    // Exibindo o PDF mesclado na tela
+    const pdfOutput = document.getElementById('result');
     pdfOutput.innerHTML = "";
     
-    const pdfDataUri = doc.output('datauristring');
+    const pdfDataUri = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
     const iframe = document.createElement('iframe');
     iframe.src = pdfDataUri;
     iframe.width = "100%";
@@ -163,21 +157,19 @@ function gerarPDF() {
     
     pdfOutput.appendChild(iframe);
 
-    // Adicionando o botão de download abaixo do PDF gerado
+    // Adicionando o botão de download abaixo do PDF mesclado
     const downloadButton = document.createElement('button');
-    downloadButton.innerText = "Baixar PDF";
+    downloadButton.innerText = "Baixar PDF Mesclado";
     downloadButton.onclick = function() {
-        doc.save(`Ficha Orcamentaria ${nomeCliente}.pdf`);
+        const link = document.createElement('a');
+        link.href = pdfDataUri;
+        link.download = 'pdf-mesclado.pdf';
+        link.click();
     };
     
     pdfOutput.appendChild(downloadButton);
-}
+});
 
-// Função para alternar a exibição das abas
-function showContent(tabName) {
-    const contents = document.querySelectorAll('.content');
-    contents.forEach(content => content.classList.remove('active'));
-
-    const activeContent = document.getElementById(tabName);
-    activeContent.classList.add('active');
-}
+// Inicializa a seção inicial (por exemplo, Referências)
+document.querySelector('.navbar a').classList.add('active');
+showContent('referencias');
