@@ -76,6 +76,9 @@ function exibirOrcamento() {
     const valorTotal = valorTotalMatrizes + valorTotalGravacaoFotolito;
 
     const detalhesOrcamento = `
+
+    <button type="button" onclick="gerarPDF()">Gerar PDF</button>
+
         <p><strong>Nome do Cliente:</strong> ${nomeCliente}</p>
         <p><strong>Descrição:</strong> ${descricao}</p>
         <table>

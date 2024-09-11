@@ -65,7 +65,7 @@ body {
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin: 20px;
 }
 
 .form-group label {
@@ -84,7 +84,7 @@ body {
 
 button[type="button"], button[type="submit"] {
     width: 100%;
-    padding: 10px;
+    margin : 10px;
     background-color: #28a745;
     border: none;
     border-radius: 4px;
@@ -97,7 +97,7 @@ button[type="button"]:hover, button[type="submit"]:hover {
 }
 
 button[type="button"]:active, button[type="submit"]:active {
-    background-color: #27ae60;
+    background-color: #03612a;
 }
 
 .copy-btn {
@@ -131,27 +131,25 @@ button[type="button"]:active, button[type="submit"]:active {
 
 #orcamentoForm {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
+    flex-direction: row;
+    justify-content: center;
+    align-items: space-between;
 }
 
 #orcamentoForm label {
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 #orcamentoForm input[type="text"], #orcamentoForm input[type="number"] {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
+    padding: 4px;
+    margin-bottom: 8px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 8px;
     font-size: 14px;
+    background-color: transparent;
 }
 
 #orcamentoForm button[type="button"] {
@@ -162,7 +160,7 @@ button[type="button"]:active, button[type="submit"]:active {
     border-radius: 4px;
     color: #fff;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 #orcamentoForm button[type="button"]:hover {
@@ -170,7 +168,7 @@ button[type="button"]:active, button[type="submit"]:active {
 }
 
 #orcamentoForm button[type="button"]:active {
-    background-color: #27ae60;
+    background-color: #97ffc2;
 }
 
 #orcamentoDetalhes {
@@ -184,15 +182,4 @@ button[type="button"]:active, button[type="submit"]:active {
 
 #pdfOutput {
     margin-top: 15px;
-}
-
-.duas-colunas {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.duas-colunas .form-group {
-    width: 45%;
-    margin-bottom: 15px;
 }

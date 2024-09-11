@@ -19,7 +19,7 @@
         </div>
     </nav>
 
-    <section id="referencias" class="content active">
+    <section id="referencias" class="content ">
         <h2>Referências</h2>
         <div class="container">
             <h1>Gerador de Referências</h1>
@@ -45,46 +45,38 @@
     <section id="orcamentos" class="content">
         <h1>Ficha Orçamentária</h1>
         <form id="orcamentoForm">
-            <div class="duas-colunas">
-                <div class="form-group">
-                    <label for="nomeCliente">Nome do Cliente:</label>
-                    <input type="text" id="nomeCliente" required>
-                </div>
-                <div class="form-group">
-                    <label for="descricao">Descrição do Serviço:</label>
-                    <input type="text" id="descricao" required>
-                </div>
+            <div class="form-group">
+
+                <label for="nomeCliente">Nome do Cliente: <input type="text" id="nomeCliente" required></label>
+
+                <label for="descricao">Descrição do Serviço: <input type="text" id="descricao" required></label>
+
+                <label for="qtdMatrizes">Quantidade de Matrizes: <input type="number" id="qtdMatrizes" required></label>
+
+                <label for="valorMatriz">Valor Unitário da Matriz:<input type="number" id="valorMatriz"
+                        required></label>
+
+
             </div>
-            <div class="duas-colunas">
-                <div class="form-group">
-                    <label for="qtdMatrizes">Quantidade de Matrizes:</label>
-                    <input type="number" id="qtdMatrizes" required>
-                </div>
-                <div class="form-group">
-                    <label for="valorMatriz">Valor Unitário da Matriz:</label>
-                    <input type="number" id="valorMatriz" required>
-                </div>
+            <div class="form-group">
+
+                <label for="qtdGravacaoFotolito">Quantidade de Gravações + Fotolitos: <input type="number"
+                        id="qtdGravacaoFotolito" required></label>
+
+                <label for="valorGravacaoFotolito">Valor Unitário da Gravação + Fotolito: <input type="number"
+                        id="valorGravacaoFotolito" required></label>
+
+                <label for="custoMaoDeObra">Custo da Mão de Obra por Unidade:<input type="number" id="custoMaoDeObra"
+                        required></label>
+
+                <button type="button" onclick="exibirOrcamento()">Exibir Orçamento</button>
             </div>
-            <div class="duas-colunas">
-                <div class="form-group">
-                    <label for="qtdGravacaoFotolito">Quantidade de Gravações + Fotolitos:</label>
-                    <input type="number" id="qtdGravacaoFotolito" required>
-                </div>
-                <div class="form-group">
-                    <label for="valorGravacaoFotolito">Valor Unitário da Gravação + Fotolito:</label>
-                    <input type="number" id="valorGravacaoFotolito" required>
-                </div>
-            </div>
-            <div class="duas-colunas">
-                <div class="form-group">
-                    <label for="custoMaoDeObra">Custo da Mão de Obra por Unidade:</label>
-                    <input type="number" id="custoMaoDeObra" required>
-                </div>
-            </div>
-            <button type="button" onclick="exibirOrcamento()">Exibir Orçamento</button>
-            <button type="button" onclick="gerarPDF()">Gerar PDF</button>
+
+
+
+
         </form>
-        <div id="orcamentoDetalhes"></div>
+        <div id="orcamentoDetalhes"> </div>
         <div id="pdfOutput" style="margin-top: 15px;"></div>
     </section>
 
