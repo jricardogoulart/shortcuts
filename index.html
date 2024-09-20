@@ -1,88 +1,115 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <title>Painel de Atividades</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <nav>
-        <div class="navbar">
-            <a href="#referencias" onclick="showContent('referencias')">Referências</a>
-            <a href="#pdf" onclick="showContent('pdf')">PDF</a>
-            <a href="#orcamentos" onclick="showContent('orcamentos')">Orçamentos</a>
-        </div>
+      <div class="navbar">
+        <a href="#referencias" onclick="showContent('referencias')"
+          >Referências</a
+        >
+        <a href="#pdf" onclick="showContent('pdf')">PDF</a>
+        <a href="#orcamentos" onclick="showContent('orcamentos')">Orçamentos</a>
+      </div>
     </nav>
 
-    <section id="referencias" class="content ">
-        <h2>Referências</h2>
-        <div class="container">
-            <h1>Gerador de Referências</h1>
-            <p>Digite suas referências no formato especificado e clique em "Gerar Referências".</p>
-            <textarea id="referencesInput" rows="10" placeholder="Exemplo: MX-137/A (37-43)"></textarea><br><br>
-            <button onclick="generateReferences()">Gerar Referências</button>
-            <h2>Referências Geradas:</h2>
-            <div id="output" class="reference"></div>
-            <button class="copy-btn" onclick="copyToClipboard()">Copiar Todas as Referências</button>
-        </div>
+    <section id="referencias" class="content">
+      <div class="container">
+        <h1>Gerador de Referências</h1>
+        <p>
+          Digite suas referências no formato especificado e clique em "Gerar
+          Referências".
+        </p>
+        <textarea
+          id="referencesInput"
+          rows="10"
+          placeholder="Exemplo: MX-137/A (37-43)"
+        ></textarea
+        ><br /><br />
+        <button class="btn" onclick="generateReferences()">
+          Gerar Referências
+        </button>
+        <h2>Referências Geradas:</h2>
+        <button class="btn" onclick="copyToClipboard()">
+          Copiar Todas as Referências
+        </button>
+        <div id="output" class="reference"></div>
+      </div>
     </section>
 
     <section id="pdf" class="content">
-        <h2>PDF</h2>
+      <div class="container">
+        <h3>Junte Seus PDF's Aqui</h3>
         <form id="pdfForm">
-            <label for="pdfFiles">Selecione os PDFs para mesclar:</label>
-            <input type="file" id="pdfFiles" multiple accept="application/pdf">
-            <button type="submit" id="mergeButton">Mesclar PDFs</button>
+          <input type="file" id="pdfFiles" multiple accept="application/pdf" />
+          <button class="btn" type="submit" id="mergeButton">
+            Mesclar PDFs
+          </button>
         </form>
         <div id="result"></div>
+      </div>
     </section>
 
     <section id="orcamentos" class="content">
+      <div class="container">
         <h1>Ficha Orçamentária</h1>
         <form id="orcamentoForm">
-            <div class="form-group">
+          <label for="nomeCliente"
+            >Nome do Cliente: <input type="text" id="nomeCliente" required
+          /></label>
+          <label for="data">Data: <input type="date" name="data" id="data" /></label>
+          <label for="descricao"
+            >Descrição do Serviço: <input type="text" id="descricao" required
+          /></label>
+          <label for="qtdMatrizes"
+            >Quantidade de Matrizes:
+            <input type="number" id="qtdMatrizes" required
+          /></label>
+          <label for="valorMatriz"
+            >Valor Unitário da Matriz:<input
+              type="number"
+              id="valorMatriz"
+              required
+          /></label>
+          <label for="qtdGravacaoFotolito"
+            >Quantidade de Gravações + Fotolitos:
+            <input type="number" id="qtdGravacaoFotolito" required
+          /></label>
+          <label for="valorGravacaoFotolito"
+            >Valor Unitário da Gravação + Fotolito:
+            <input type="number" id="valorGravacaoFotolito" required
+          /></label>
+          <label for="custoMaoDeObra"
+            >Custo da Mão de Obra por Unidade:<input
+              type="number"
+              id="custoMaoDeObra"
+              required
+          /></label>
 
-                <label for="nomeCliente">Nome do Cliente: <input type="text" id="nomeCliente" required></label>
-
-                <label for="descricao">Descrição do Serviço: <input type="text" id="descricao" required></label>
-
-                <label for="qtdMatrizes">Quantidade de Matrizes: <input type="number" id="qtdMatrizes" required></label>
-
-                <label for="valorMatriz">Valor Unitário da Matriz:<input type="number" id="valorMatriz"
-                        required></label>
-
-
-            </div>
-            <div class="form-group">
-
-                <label for="qtdGravacaoFotolito">Quantidade de Gravações + Fotolitos: <input type="number"
-                        id="qtdGravacaoFotolito" required></label>
-
-                <label for="valorGravacaoFotolito">Valor Unitário da Gravação + Fotolito: <input type="number"
-                        id="valorGravacaoFotolito" required></label>
-
-                <label for="custoMaoDeObra">Custo da Mão de Obra por Unidade:<input type="number" id="custoMaoDeObra"
-                        required></label>
-
-                <button type="button" onclick="exibirOrcamento()">Exibir Orçamento</button>
-            </div>
-
-
-
-
+          <button type="button" onclick="exibirOrcamento()">
+            Exibir Orçamento
+          </button>
         </form>
-        <div id="orcamentoDetalhes"> </div>
-        <div id="pdfOutput" style="margin-top: 15px;"></div>
+        <p>Confira as informações abaixo</p>
+        <div id="orcamentoDetalhes"></div>
+        <div id="pdfOutput" style="margin-top: 15px"></div>
+      </div>
     </section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <!-- Importando bibliotecas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Script personalizado -->
     <script src="scripts.js"></script>
-</body>
-
+  </body>
 </html>

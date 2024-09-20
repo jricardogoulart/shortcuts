@@ -1,185 +1,223 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
 
 body {
-    font-family: Inter, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #fdf8f8;
-    color: #141414;
-    line-height: 1.6;
-    font-size: 16px;
+  font-family: Inter, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fdf8f8;
+  color: #141414;
+  font-size: 16px;
 }
 
 .navbar {
-    display: flex;
-    background-color: #333;
-    justify-content: space-around;
-    padding: 8px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  background-color: #333;
+  justify-content: space-around;
+  padding: 8px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar a {
-    color: #fafafa;
-    text-align: center;
-    padding: 8px 16px;
-    text-decoration: none;
-    font-size: 18px;
-    opacity: 0.7;
-    transition: 200ms ease;
-    border-radius: 4px;
+  color: #fafafa;
+  text-align: center;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-size: 18px;
+  opacity: 0.7;
+  transition: 200ms ease;
+  border-radius: 8px;
 }
 
 .navbar a:hover {
-    opacity: 1;
-    background-color: #444;
-}
-
-.navbar a.active {
-    background-color: #555;
-    opacity: 1;
+  opacity: 1;
+  background-color: #4444446b;
 }
 
 .content {
-    padding: 20px;
-    display: none;
+  padding: 16px;
+  display: none;
 }
 
 .content.active {
-    display: block;
+  display: block;
 }
 
 .container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
+  background-color: #fff;
+  padding: 0px 8px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .container h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 10px;
+  text-align: center;
+  color: #333;
+  margin-bottom: 10px;
 }
 
-.form-group {
-    margin: 20px;
+textarea {
+  width: 500px;
+  height: 60px;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    color: #555;
+.btn {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.form-group input[type="text"], .form-group input[type="number"], .form-group input[type="file"] {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.btn:hover {
+  background-color: #3e8e41;
 }
 
-button[type="button"], button[type="submit"] {
-    width: 100%;
-    margin : 10px;
-    background-color: #28a745;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-}
-
-button[type="button"]:hover, button[type="submit"]:hover {
-    background-color: #2ecc71;
-}
-
-button[type="button"]:active, button[type="submit"]:active {
-    background-color: #03612a;
-}
-
-.copy-btn {
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.copy-btn:hover {
-    background-color: #3e8e41;
-}
-
-#pdfForm {
-    margin-top: 20px;
-}
-
-#mergeButton {
-    margin-top: 10px;
-}
-
-#result, #output {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #f9f9f9;
+#result,
+#output {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
 }
 
 #orcamentoForm {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: space-between;
+  background-color: #fff;
+  padding: 32px; /* Múltiplo de 8 */
+  border-radius: 8px; /* Múltiplo de 8 */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Múltiplo de 8 */
+  width: 100%;
+  max-width: 640px; /* Múltiplo de 8 */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px; /* Múltiplo de 8 */
 }
 
+/* Estilo para os labels e inputs */
 #orcamentoForm label {
-    margin-bottom: 4px;
-    font-weight: bold;
-    font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px; /* Múltiplo de 8 */
+  color: #333;
 }
 
-#orcamentoForm input[type="text"], #orcamentoForm input[type="number"] {
-    width: 100%;
-    padding: 4px;
-    margin-bottom: 8px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 14px;
-    background-color: transparent;
+#orcamentoForm input {
+  padding: 8px; /* Múltiplo de 8 */
+  font-size: 16px; /* Múltiplo de 8 */
+  border: 1px solid #ccc;
+  border-radius: 8px; /* Múltiplo de 8 */
+  margin-top: 8px; /* Múltiplo de 8 */
+  transition: border-color 0.3s;
 }
 
-#orcamentoForm button[type="button"] {
-    width: 100%;
-    padding: 8px;
-    background-color: #28a745;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 12px;
+#orcamentoForm input:focus {
+  border-color: #4caf50;
+  outline: none;
 }
 
-#orcamentoForm button[type="button"]:hover {
-    background-color: #2ecc71;
+/* O botão ocupará toda a largura da grid */
+#orcamentoForm button {
+  padding: 16px; /* Múltiplo de 8 */
+  font-size: 16px; /* Múltiplo de 8 */
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 8px; /* Múltiplo de 8 */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  grid-column: 1 / span 2; /* Faz o botão ocupar 2 colunas */
 }
 
-#orcamentoForm button[type="button"]:active {
-    background-color: #97ffc2;
+/* Efeito hover no botão */
+#orcamentoForm button:hover {
+  background-color: #3e8e41;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 600px) {
+  #orcamentoForm {
+    grid-template-columns: 1fr; /* Retorna a 1 coluna em telas pequenas */
+    padding: 24px; /* Aumentado para 24px */
+  }
+
+  #orcamentoForm input, #orcamentoForm button {
+    font-size: 14px; /* Ajuste para telas menores */
+  }
+}
+
+/* Container principal */
+.ficha-orc-container {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.ficha-orc-title {
+  text-align: center;
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+/* Texto geral */
+.ficha-orc-text {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.ficha-orc-strong {
+  color: #333;
+}
+
+/* Tabela */
+.ficha-orc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.ficha-orc-th {
+  background-color: #4f5c50;
+  color: #fff;
+  padding: 8px;
+  text-align: left;
+}
+
+.ficha-orc-td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Valor total destacado */
+.ficha-orc-total {
+  font-size: 18px;
+  font-weight: bold;
+  color: #4caf50;
 }
 
 #orcamentoDetalhes {
-    margin-top: 15px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    font-size: 14px;
+  margin-top: 15px;
+  width: 600px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  font-size: 14px;
 }
 
 #pdfOutput {
-    margin-top: 15px;
+  margin-top: 15px;
 }
+
+

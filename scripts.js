@@ -57,79 +57,109 @@ function copyToClipboard() {
 
 // Capturar parâmetros do formulário e gerar PDF para orçamentos
 function getFormData() {
-    return {
-        nomeCliente: document.getElementById('nomeCliente').value,
-        descricao: document.getElementById('descricao').value,
-        qtdMatrizes: parseInt(document.getElementById('qtdMatrizes').value),
-        valorMatriz: parseFloat(document.getElementById('valorMatriz').value),
-        qtdGravacaoFotolito: parseInt(document.getElementById('qtdGravacaoFotolito').value),
-        valorGravacaoFotolito: parseFloat(document.getElementById('valorGravacaoFotolito').value),
-        custoMaoDeObra: parseFloat(document.getElementById('custoMaoDeObra').value)
-    };
+  return {
+      nomeCliente: document.getElementById('nomeCliente').value,
+      data: document.getElementById('data').value,  // Corrigido para capturar o valor da data
+      descricao: document.getElementById('descricao').value,
+      qtdMatrizes: parseInt(document.getElementById('qtdMatrizes').value),
+      valorMatriz: parseFloat(document.getElementById('valorMatriz').value),
+      qtdGravacaoFotolito: parseInt(document.getElementById('qtdGravacaoFotolito').value),
+      valorGravacaoFotolito: parseFloat(document.getElementById('valorGravacaoFotolito').value),
+      custoMaoDeObra: parseFloat(document.getElementById('custoMaoDeObra').value)
+  };
 }
 
 function exibirOrcamento() {
-    const { nomeCliente, descricao, qtdMatrizes, valorMatriz, qtdGravacaoFotolito, valorGravacaoFotolito, custoMaoDeObra } = getFormData();
+  const { nomeCliente, data, descricao, qtdMatrizes, valorMatriz, qtdGravacaoFotolito, valorGravacaoFotolito, custoMaoDeObra } = getFormData();
 
-    const valorTotalMatrizes = qtdMatrizes * valorMatriz;
-    const valorTotalGravacaoFotolito = qtdGravacaoFotolito * valorGravacaoFotolito;
-    const valorTotal = valorTotalMatrizes + valorTotalGravacaoFotolito;
+  const valorTotalMatrizes = qtdMatrizes * valorMatriz;
+  const valorTotalGravacaoFotolito = qtdGravacaoFotolito * valorGravacaoFotolito;
+  const valorTotal = valorTotalMatrizes + valorTotalGravacaoFotolito;
 
-    const detalhesOrcamento = `
+  const detalhesOrcamento = `
+  <button  class="btn" type="button" onclick="gerarPDF()">Gerar PDF</button>
+      
+  <div class="ficha-orc-container">
+      <h1 class="ficha-orc-title">Ficha Orçamentária</h1>
+      
+      <p class="ficha-orc-text">
+        <strong class="ficha-orc-strong">Nome do Cliente:</strong> ${nomeCliente} 
+        <strong class="ficha-orc-strong">Data:</strong> ${new Date(data).toLocaleDateString()}
+      </p>
+      
+      <p class="ficha-orc-text">
+        <strong class="ficha-orc-strong">Descrição:</strong> ${descricao}
+      </p>
+      
+      <table class="ficha-orc-table">
+        <thead>
+          <tr>
+            <th class="ficha-orc-th">Item</th>
+            <th class="ficha-orc-th">Valor Unitário</th>
+            <th class="ficha-orc-th">Quantidade</th>
+            <th class="ficha-orc-th">Valor Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ficha-orc-td">Matriz Serigráfica</td>
+            <td class="ficha-orc-td">R$ ${valorMatriz.toFixed(2)}</td>
+            <td class="ficha-orc-td">${qtdMatrizes}</td>
+            <td class="ficha-orc-td">R$ ${valorTotalMatrizes.toFixed(2)}</td>
+          </tr>
+          <tr>
+            <td class="ficha-orc-td">Gravação + Fotolito</td>
+            <td class="ficha-orc-td">R$ ${valorGravacaoFotolito.toFixed(2)}</td>
+            <td class="ficha-orc-td">${qtdGravacaoFotolito}</td>
+            <td class="ficha-orc-td">R$ ${valorTotalGravacaoFotolito.toFixed(2)}</td>
+          </tr>
+        </tbody>
+      </table>
 
-    <button type="button" onclick="gerarPDF()">Gerar PDF</button>
+      <p class="ficha-orc-text">
+        <strong class="ficha-orc-strong">Valor Total Matrizes:</strong> R$ ${valorTotalMatrizes.toFixed(2)}
+      </p>
+      
+      <p class="ficha-orc-text">
+        <strong class="ficha-orc-strong">Valor Total Gravação + Fotolito:</strong> R$ ${valorTotalGravacaoFotolito.toFixed(2)}
+      </p>
+      
+      <p class="ficha-orc-text">
+        <strong class="ficha-orc-strong">Custo de Mão de Obra:</strong> R$ ${custoMaoDeObra}
+      </p>
+      
+      <p class="ficha-orc-total">
+        <strong class="ficha-orc-strong">Valor Total:</strong> R$ ${valorTotal.toFixed(2)}
+      </p>
+  </div>
+  `;
 
-        <p><strong>Nome do Cliente:</strong> ${nomeCliente}</p>
-        <p><strong>Descrição:</strong> ${descricao}</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Item</th>
-                    <th>Valor Unitário</th>
-                    <th>Quantidade</th>
-                    <th>Valor Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Matriz Serigráfica</td>
-                    <td>R$ ${valorMatriz.toFixed(2)}</td>
-                    <td>${qtdMatrizes}</td>
-                    <td>R$ ${valorTotalMatrizes.toFixed(2)}</td>
-                </tr>
-                <tr>
-                    <td>Gravação + Fotolito</td>
-                    <td>R$ ${valorGravacaoFotolito.toFixed(2)}</td>
-                    <td>${qtdGravacaoFotolito}</td>
-                    <td>R$ ${valorTotalGravacaoFotolito.toFixed(2)}</td>
-                </tr>
-            </tbody>
-        </table>
-        <p><strong>Valor Total Matrizes:</strong> R$ ${valorTotalMatrizes.toFixed(2)}</p>
-        <p><strong>Valor Total Gravação + Fotolito:</strong> R$ ${valorTotalGravacaoFotolito.toFixed(2)}</p>
-        <p><strong>Valor Total:</strong> R$ ${valorTotal.toFixed(2)}</p>
-    `;
-
-    document.getElementById('orcamentoDetalhes').innerHTML = detalhesOrcamento;
+  document.getElementById('orcamentoDetalhes').innerHTML = detalhesOrcamento;
 }
 
 function gerarPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+  const { jsPDF } = window.jspdf;
 
-    const { nomeCliente, descricao, qtdMatrizes, valorMatriz, qtdGravacaoFotolito, valorGravacaoFotolito, custoMaoDeObra } = getFormData();
+  const orcamentoDetalhes = document.getElementById('orcamentoDetalhes');
+  const nomeCliente = document.getElementById('nomeCliente').value;
+  const data = document.getElementById('data').value;
+  const dataFormatada = new Date(data).toLocaleDateString();
 
-    const valorTotalMatrizes = qtdMatrizes * valorMatriz;
-    const valorTotalGravacaoFotolito = qtdGravacaoFotolito * valorGravacaoFotolito;
-    const valorTotal = valorTotalMatrizes + valorTotalGravacaoFotolito;
+  // Usando html2canvas para capturar o HTML
+  html2canvas(orcamentoDetalhes, { scale: 2 }).then(function (canvas) {
+      const imgData = canvas.toDataURL('image/png', 1.0); // Qualidade 1.0 para máxima
 
-    doc.text(`Nome do Cliente: ${nomeCliente}`, 10, 10);
-    doc.text(`Descrição: ${descricao}`, 10, 20);
-    doc.text(`Valor Total Matrizes: R$ ${valorTotalMatrizes.toFixed(2)}`, 10, 30);
-    doc.text(`Valor Total Gravação + Fotolito: R$ ${valorTotalGravacaoFotolito.toFixed(2)}`, 10, 40);
-    doc.text(`Valor Total: R$ ${valorTotal.toFixed(2)}`, 10, 50);
+      const imgWidth = 190; // Largura da imagem no PDF
+      const imgHeight = (canvas.height * imgWidth) / canvas.width; // Altura proporcional
 
-    doc.save('orcamento.pdf');
+      const doc = new jsPDF();
+      doc.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+
+      // Salva o PDF com nome customizado
+      doc.save(`Orcamento_${nomeCliente}_${dataFormatada}.pdf`);
+  }).catch(function (error) {
+      console.error('Erro ao gerar o PDF:', error);
+  });
 }
 
 // Mesclagem de PDFs
