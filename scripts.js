@@ -204,3 +204,108 @@ document.getElementById('pdfForm').addEventListener('submit', async (event) => {
 // Inicializa a seção inicial (por exemplo, Referências)
 document.querySelector('.navbar a').classList.add('active');
 showContent('referencias');
+
+
+// Clientes
+document.addEventListener('DOMContentLoaded', function(){
+  let clientes = [];
+
+// Função para buscar o endereço pelo CEP utilizando a API do ViaCEP
+function buscarEndereco(cep) {
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then(response => response.json())
+        .then(data => {
+            if (!data.erro) {
+                document.getElementById('endereco').value = data.logradouro;
+            } else {
+                alert('CEP não encontrado!');
+                document.getElementById('endereco').value = '';
+            }
+        })
+        .catch(error => console.error('Erro ao buscar endereço:', error));
+}
+
+// Quando o usuário sair do campo de CEP, buscar o endereço
+document.getElementById('cep').addEventListener('blur', function() {
+    const cep = this.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    if (cep.length === 8) { // Verifica se o CEP tem 8 dígitos
+        buscarEndereco(cep);
+    } else {
+        alert('CEP inválido!');
+    }
+});
+
+// Função para criar e exibir os cards dos clientes
+function criarCards(clientes) {
+    const clientesContainer = document.getElementById('clientes');
+    clientesContainer.innerHTML = ''; // Limpar os cards anteriores
+
+    clientes.forEach(cliente => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.innerHTML = `
+            <h3>${cliente.nome}</h3>
+            <p><strong>Telefone:</strong> ${cliente.telefone}</p>
+            <p><strong>CNPJ:</strong> ${cliente.cnpj}</p>
+            <p><strong>CEP:</strong> ${cliente.cep}</p>
+            <p><strong>Endereço:</strong> ${cliente.endereco}, ${cliente.numero}</p>
+        `;
+        clientesContainer.appendChild(card);
+    });
+}
+
+// Função para baixar o JSON dos clientes
+function downloadJSON() {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(clientes));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", "clientes.json");
+    document.body.appendChild(downloadAnchorNode); // Required for Firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+}
+
+// Função para carregar um JSON de clientes
+function carregarClientes(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            clientes = JSON.parse(e.target.result);
+            criarCards(clientes); // Atualizar os cards com os clientes carregados
+        };
+        reader.readAsText(file);
+    }
+}
+
+// Evento para o botão de download do JSON
+document.getElementById('downloadJson').addEventListener('click', downloadJSON);
+
+// Evento para upload do JSON
+document.getElementById('uploadJson').addEventListener('change', carregarClientes);
+
+// Evento de envio do formulário para cadastrar cliente
+document.getElementById('formCliente').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const nome = document.getElementById('nome').value;
+    const telefone = document.getElementById('telefone').value;
+    const cnpj = document.getElementById('cnpj').value;
+    const cep = document.getElementById('cep').value;
+    const numero = document.getElementById('numero').value;
+    const endereco = document.getElementById('endereco').value;
+
+    const novoCliente = {
+        nome,
+        telefone,
+        cnpj,
+        cep,
+        endereco,
+        numero
+    };
+
+    clientes.push(novoCliente); // Adiciona o cliente à lista
+    criarCards(clientes); // Atualiza os cards
+    this.reset(); // Limpa o formulário
+});
+}) 
