@@ -44,7 +44,6 @@ body {
 
 .container {
   background-color: #fff;
-  padding: 0px 8px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-width: 800px;
@@ -57,12 +56,13 @@ body {
 .container h1 {
   text-align: center;
   color: #333;
-  margin-bottom: 10px;
 }
 
 textarea {
-  width: 500px;
-  height: 60px;
+  width: 600px;
+  height: 16px;
+  font-family: Inter, sans-serif;
+  padding: 8px;
 }
 
 .btn {
@@ -72,6 +72,7 @@ textarea {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin: 8px 0px;
 }
 
 .btn:hover {
@@ -85,9 +86,9 @@ textarea {
   border: 1px solid #ddd;
   border-radius: 4px;
   background-color: #f9f9f9;
-}
+}   
 
-#orcamentoForm {
+.form {
   background-color: #fff;
   padding: 32px; /* Múltiplo de 8 */
   border-radius: 8px; /* Múltiplo de 8 */
@@ -100,29 +101,28 @@ textarea {
 }
 
 /* Estilo para os labels e inputs */
-#orcamentoForm label {
+.form label {
   display: flex;
   flex-direction: column;
   font-size: 16px; /* Múltiplo de 8 */
   color: #333;
 }
 
-#orcamentoForm input {
+.form input {
   padding: 8px; /* Múltiplo de 8 */
   font-size: 16px; /* Múltiplo de 8 */
   border: 1px solid #ccc;
   border-radius: 8px; /* Múltiplo de 8 */
-  margin-top: 8px; /* Múltiplo de 8 */
-  transition: border-color 0.3s;
+  transition: border-color 0.6s;
 }
 
-#orcamentoForm input:focus {
+.form input:focus {
   border-color: #4caf50;
   outline: none;
 }
 
 /* O botão ocupará toda a largura da grid */
-#orcamentoForm button {
+.form button {
   padding: 16px; /* Múltiplo de 8 */
   font-size: 16px; /* Múltiplo de 8 */
   background-color: #4caf50;
@@ -135,18 +135,18 @@ textarea {
 }
 
 /* Efeito hover no botão */
-#orcamentoForm button:hover {
+.form button:hover {
   background-color: #3e8e41;
 }
 
 /* Ajustes responsivos */
 @media (max-width: 600px) {
-  #orcamentoForm {
+  .form {
     grid-template-columns: 1fr; /* Retorna a 1 coluna em telas pequenas */
     padding: 24px; /* Aumentado para 24px */
   }
 
-  #orcamentoForm input, #orcamentoForm button {
+  .form input, .form button {
     font-size: 14px; /* Ajuste para telas menores */
   }
 }
@@ -220,53 +220,3 @@ textarea {
   margin-top: 15px;
 }
 
-/* Clientes */
-.json-actions {
-  margin-bottom: 20px;
-}
-
-#client-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.client-card {
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 5px;
-  width: 250px;
-  background-color: #f9f9f9;
-}
-
-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  align-items: center;
-}
-
-label {
-  grid-column: span 2;
-}
-
-input {
-  grid-column: span 2;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-
-button {
-  grid-column: span 2;
-  padding: 10px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #218838;
-}
