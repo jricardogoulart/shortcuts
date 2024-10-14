@@ -90,29 +90,29 @@ textarea {
 
 .form {
   background-color: #fff;
-  padding: 32px; /* Múltiplo de 8 */
-  border-radius: 8px; /* Múltiplo de 8 */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Múltiplo de 8 */
+  padding: 32px; 
+  border-radius: 8px; 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
   width: 100%;
-  max-width: 640px; /* Múltiplo de 8 */
+  max-width: 640px; 
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 16px; /* Múltiplo de 8 */
+  grid-gap: 16px; 
 }
 
-/* Estilo para os labels e inputs */
+
 .form label {
   display: flex;
   flex-direction: column;
-  font-size: 16px; /* Múltiplo de 8 */
+  font-size: 16px; 
   color: #333;
 }
 
 .form input {
-  padding: 8px; /* Múltiplo de 8 */
-  font-size: 16px; /* Múltiplo de 8 */
+  padding: 8px; 
+  font-size: 16px; 
   border: 1px solid #ccc;
-  border-radius: 8px; /* Múltiplo de 8 */
+  border-radius: 8px; 
   transition: border-color 0.6s;
 }
 
@@ -123,12 +123,12 @@ textarea {
 
 /* O botão ocupará toda a largura da grid */
 .form button {
-  padding: 16px; /* Múltiplo de 8 */
-  font-size: 16px; /* Múltiplo de 8 */
+  padding: 16px; 
+  font-size: 16px; 
   background-color: #4caf50;
   color: #fff;
   border: none;
-  border-radius: 8px; /* Múltiplo de 8 */
+  border-radius: 8px; 
   cursor: pointer;
   transition: background-color 0.3s;
   grid-column: 1 / span 2; /* Faz o botão ocupar 2 colunas */
