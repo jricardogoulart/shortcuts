@@ -170,15 +170,15 @@ function gerarPDF() {
   // Usando html2canvas para capturar o HTML
   html2canvas(orcamentoDetalhes, { scale: 2 })
     .then(function (canvas) {
-      const imgData = canvas.toDataURL("image/png", 1.0); // Qualidade 1.0 para máxima
+      const imgData = canvas.toDataURL("image/png", 100.0); 
 
-      const imgWidth = 190; // Largura da imagem no PDF
-      const imgHeight = (canvas.height * imgWidth) / canvas.width; // Altura proporcional
+      const imgWidth = 190; 
+      const imgHeight = (canvas.height * imgWidth) / canvas.width; 
 
       const doc = new jsPDF();
       doc.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
 
-      // Salva o PDF com nome customizado
+      
       doc.save(`Orcamento_${nomeCliente}_${dataFormatada}.pdf`);
     })
     .catch(function (error) {
@@ -205,7 +205,7 @@ document.getElementById("pdfForm").addEventListener("submit", async (event) => {
 
   const pdfBytes = await pdfDoc.save();
 
-  // Exibindo o PDF mesclado na tela
+ 
   const pdfOutput = document.getElementById("result");
   pdfOutput.innerHTML = "";
 
@@ -219,7 +219,7 @@ document.getElementById("pdfForm").addEventListener("submit", async (event) => {
 
   pdfOutput.appendChild(iframe);
 
-  // Adicionando o botão de download abaixo do PDF mesclado
+
   const downloadButton = document.createElement("button");
   downloadButton.innerText = "Baixar PDF Mesclado";
   downloadButton.onclick = function () {
@@ -232,6 +232,5 @@ document.getElementById("pdfForm").addEventListener("submit", async (event) => {
   pdfOutput.appendChild(downloadButton);
 });
 
-// Inicializa a seção inicial (por exemplo, Referências)
 document.querySelector(".navbar a").classList.add("active");
 showContent("home");

@@ -195,7 +195,7 @@ textarea {
   outline: none;
 }
 
-/* O botão ocupará toda a largura da grid */
+
 .form button {
   padding: 16px;
   font-size: 16px;
@@ -205,28 +205,26 @@ textarea {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
-  grid-column: 1 / span 2; /* Faz o botão ocupar 2 colunas */
+  grid-column: 1 / span 2; 
 }
 
-/* Efeito hover no botão */
 .form button:hover {
   background-color: #3e8e41;
 }
 
-/* Ajustes responsivos */
 @media (max-width: 600px) {
   .form {
-    grid-template-columns: 1fr; /* Retorna a 1 coluna em telas pequenas */
-    padding: 24px; /* Aumentado para 24px */
+    grid-template-columns: 1fr; 
+    padding: 24px; 
   }
 
   .form input,
   .form button {
-    font-size: 14px; /* Ajuste para telas menores */
+    font-size: 14px; 
   }
 }
 
-/* Container principal */
+
 .ficha-orc-container {
   background-color: #fff;
   border-radius: 8px;
@@ -234,7 +232,7 @@ textarea {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Título */
+
 .ficha-orc-title {
   text-align: center;
   color: #333;
@@ -242,7 +240,7 @@ textarea {
   margin-bottom: 16px;
 }
 
-/* Texto geral */
+
 .ficha-orc-text {
   font-size: 16px;
   color: #555;
@@ -253,7 +251,7 @@ textarea {
   color: #333;
 }
 
-/* Tabela */
+
 .ficha-orc-table {
   width: 100%;
   border-collapse: collapse;
@@ -274,7 +272,7 @@ textarea {
   text-align: left;
 }
 
-/* Valor total destacado */
+
 .ficha-orc-total {
   font-size: 18px;
   font-weight: bold;
