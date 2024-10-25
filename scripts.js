@@ -234,4 +234,4 @@ document.getElementById("pdfForm").addEventListener("submit", async (event) => {
 
 // Inicializa a seção inicial (por exemplo, Referências)
 document.querySelector(".navbar a").classList.add("active");
-showContent("referencias");
+showContent("home");

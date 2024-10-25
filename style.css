@@ -30,19 +30,72 @@ body {
   align-items: center;
 }
 
-img#logo{
+img#logo {
   opacity: 1;
   width: 150px;
   transition: 5ms;
 }
 
-img#logo:hover{
+img#logo:hover {
   cursor: pointer;
 }
 
 .navbar a:hover {
   opacity: 1;
   background-color: #4444446b;
+}
+
+div.animated-background {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(270deg, #1e3c72, #1b639e, #0c5a6b, #2193b0);
+  background-size: 800% 800%;
+  animation: gradientAnimation 10s ease infinite;
+}
+div.animated-background > h1 {
+  font-weight: lighter;
+  font-size: 24px;
+  padding: 4px;
+}
+.image-effect {
+  height: 100px;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+#home {
+  padding: 0;
+  margin: 0;
+}
+
+.animated-background h1 {
+  color: #fff;
+  font-size: 2em;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .content {
@@ -98,59 +151,58 @@ textarea {
   border: 1px solid #ddd;
   border-radius: 4px;
   background-color: #f9f9f9;
-}   
+}
 
 .form {
   background-color: #fff;
-  padding: 32px; 
-  border-radius: 8px; 
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 640px; 
+  max-width: 640px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 16px; 
+  grid-gap: 16px;
 }
 
-.form label:focus-within{
+.form label:focus-within {
   color: #4caf50;
- font-weight: 550;
+  font-weight: 550;
 }
 
 .form label {
   display: flex;
   flex-direction: column;
-  font-size: 16px; 
+  font-size: 16px;
   color: #333;
 }
 
-.form label:focus-within{
+.form label:focus-within {
   color: #4caf50;
- font-weight: 550;
+  font-weight: 550;
 }
 
 .form input {
-  padding: 8px; 
-  font-size: 16px; 
+  padding: 8px;
+  font-size: 16px;
   border: 1.8px solid #ccc;
-  border-radius: 8px; 
+  border-radius: 8px;
   transition: border-color 0.6s;
 }
 
 .form input:focus {
   border-color: #4caf50;
   outline: none;
-
 }
 
 /* O botão ocupará toda a largura da grid */
 .form button {
-  padding: 16px; 
-  font-size: 16px; 
+  padding: 16px;
+  font-size: 16px;
   background-color: #4caf50;
   color: #fff;
   border: none;
-  border-radius: 8px; 
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
   grid-column: 1 / span 2; /* Faz o botão ocupar 2 colunas */
@@ -168,7 +220,8 @@ textarea {
     padding: 24px; /* Aumentado para 24px */
   }
 
-  .form input, .form button {
+  .form input,
+  .form button {
     font-size: 14px; /* Ajuste para telas menores */
   }
 }
@@ -241,4 +294,3 @@ textarea {
 #pdfOutput {
   margin-top: 15px;
 }
-
