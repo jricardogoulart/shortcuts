@@ -180,7 +180,7 @@ textarea {
 
 .form label:focus-within {
   color: #4caf50;
-  font-weight: 550;
+  font-weight: lighter;
 }
 
 .form label {
