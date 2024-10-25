@@ -45,8 +45,25 @@ img#logo:hover {
   background-color: #4444446b;
 }
 
+.texture{
+  background-image: url(assets/background.svg) ;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.texture h1{
+  font-weight: 100;
+  letter-spacing: 0.5px;
+  font-size: 8px;
+}
+
+
 div.animated-background {
-  height: 100vh;
+  height: calc(100vh - 53px); 
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -55,11 +72,7 @@ div.animated-background {
   background-size: 800% 800%;
   animation: gradientAnimation 10s ease infinite;
 }
-div.animated-background > h1 {
-  font-weight: lighter;
-  font-size: 24px;
-  padding: 4px;
-}
+
 .image-effect {
   height: 100px;
   animation: pulse 3s ease-in-out infinite;
