@@ -12,16 +12,19 @@
   </head>
 
   <body>
-    <nav>
-      <div class="navbar">
-        <a href="#referencias" onclick="showContent('referencias')"
-          >Referências</a
-        >
-        <a href="#pdf" onclick="showContent('pdf')">PDF</a>
-        <a href="#orcamentos" onclick="showContent('orcamentos')">Orçamentos</a>
-        <a href="#clientes" onclick="showContent('clientes')">Clientes</a>
-      </div>
-    </nav>
+    <header>
+      <nav>
+        <div class="navbar">
+          <img src="logo.svg" alt="logo" id="logo" onclick="showContent('home')">
+          <a href="#referencias" onclick="showContent('referencias')"
+            >Referências</a
+          >
+          <a href="#pdf" onclick="showContent('pdf')">PDF</a>
+          <a href="#orcamentos" onclick="showContent('orcamentos')">Orçamentos</a>
+          <a href="#clientes" onclick="showContent('clientes')">Clientes</a>
+        </div>
+      </nav>
+    </header>
     <section id="referencias" class="content">
       <div class="container">
         <h1>Gerador de Referências</h1>

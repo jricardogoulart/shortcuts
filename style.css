@@ -26,6 +26,18 @@ body {
   opacity: 0.7;
   transition: 200ms ease;
   border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+img#logo{
+  opacity: 1;
+  width: 150px;
+  transition: 5ms;
+}
+
+img#logo:hover{
+  cursor: pointer;
 }
 
 .navbar a:hover {
@@ -100,6 +112,10 @@ textarea {
   grid-gap: 16px; 
 }
 
+.form label:focus-within{
+  color: #4caf50;
+ font-weight: 550;
+}
 
 .form label {
   display: flex;
@@ -119,6 +135,7 @@ textarea {
 .form input:focus {
   border-color: #4caf50;
   outline: none;
+
 }
 
 /* O botão ocupará toda a largura da grid */
