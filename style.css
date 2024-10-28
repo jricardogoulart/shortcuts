@@ -151,6 +151,7 @@ textarea {
   cursor: pointer;
   margin: 4px 0px;
   transition: 360ms;
+  font-size: 16px;
 }
 
 .btn:hover {
@@ -161,7 +162,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px;
+  
 }
 
 .other h2, p {
@@ -169,19 +170,17 @@ textarea {
 }
 
 .other button{
-  padding: 8px;
-  border-radius: 8px;
+  padding: 6px ;
+  border-radius: 4px;
   cursor: pointer;
   transition: 200ms;
   background-color: #2193b0;
   border: none;
+  color: #fff;
+  font-size: 16px;
 }
 
-.other #copy{
-  background-image: url(/assets/copy-btn.svg);
-  background-size: cover;
-  padding: 24px;
-}
+
 
 .other #pdf{
   background-image: url(/assets/export-pdf.svg);

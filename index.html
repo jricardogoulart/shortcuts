@@ -48,12 +48,13 @@
           placeholder="Exemplo: MX-137/A (37-43)"
         ></textarea
         ><br /><br />
-        <button class="btn" onclick="generateReferences()">
-          Gerar Referências
+        <button class="btn" onclick="generateReferences()">Gerar Referências 
+          <i class="fa-solid fa-circle-plus"></i>
         </button>
         <div class="other">
           <h2>Referências Geradas:</h2>
           <button id="copy" onclick="copyToClipboard()">
+            Copiar <i class="fa-solid fa-clone"></i>
           </button>
         </div>
         <div id="output" class="reference"></div>
@@ -113,11 +114,12 @@
 
           <button type="button" onclick="exibirOrcamento()">
             Exibir Orçamento
+        
           </button>
         </form>
         <div class="other">
           <p>Confira as informações abaixo</p>
-          <button id="pdf"  type="button" onclick="gerarPDF()">
+          <button type="button" onclick="gerarPDF()"> Salvar PDF <i class="fa-solid fa-file-lines"></i>
           </button>
         </div>
         <div id="orcamentoDetalhes"></div>
@@ -185,7 +187,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-   
+    <script src="https://kit.fontawesome.com/b73db7ae32.js" crossorigin="anonymous"></script>
     <script src="scripts.js"></script>
   </body>
 </html>
