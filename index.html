@@ -51,10 +51,11 @@
         <button class="btn" onclick="generateReferences()">
           Gerar Referências
         </button>
-        <h2>Referências Geradas:</h2>
-        <button class="btn" onclick="copyToClipboard()">
-          Copiar Todas as Referências
-        </button>
+        <div class="other">
+          <h2>Referências Geradas:</h2>
+          <button id="copy" onclick="copyToClipboard()">
+          </button>
+        </div>
         <div id="output" class="reference"></div>
       </div>
     </section>
@@ -114,10 +115,11 @@
             Exibir Orçamento
           </button>
         </form>
-        <p>Confira as informações abaixo</p>
-        <button class="btn" type="button" onclick="gerarPDF()">
-          Gerar PDF
-        </button>
+        <div class="other">
+          <p>Confira as informações abaixo</p>
+          <button id="pdf"  type="button" onclick="gerarPDF()">
+          </button>
+        </div>
         <div id="orcamentoDetalhes"></div>
         <div id="pdfOutput"></div>
       </div>

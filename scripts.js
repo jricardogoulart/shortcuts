@@ -215,11 +215,8 @@ document.getElementById("pdfForm").addEventListener("submit", async (event) => {
   const iframe = document.createElement("iframe");
   iframe.src = pdfDataUri;
   iframe.width = "100%";
-  iframe.height = "1200px";
-
-  pdfOutput.appendChild(iframe);
-
-
+  iframe.height = "600px";
+  
   const downloadButton = document.createElement("button");
   downloadButton.innerText = "Baixar PDF Mesclado";
   downloadButton.onclick = function () {
@@ -230,6 +227,8 @@ document.getElementById("pdfForm").addEventListener("submit", async (event) => {
   };
 
   pdfOutput.appendChild(downloadButton);
+  pdfOutput.appendChild(iframe);
+
 });
 
 document.querySelector(".navbar a").classList.add("active");
