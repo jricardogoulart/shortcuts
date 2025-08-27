@@ -12,7 +12,7 @@ body {
 .navbar {
   display: flex;
   background-color: #333;
-  justify-content: space-around;
+  justify-content: space-evenly;
   padding: 8px 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -22,7 +22,7 @@ body {
   text-align: center;
   padding: 8px 16px;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 16px;
   opacity: 0.7;
   transition: 200ms ease;
   border-radius: 8px;
@@ -32,12 +32,13 @@ body {
 
 img#logo {
   opacity: 1;
-  width: 150px;
-  transition: 5ms;
+  width: 144px;
+  transition: 500ms;
 }
 
 img#logo:hover {
   cursor: pointer;
+  opacity: 0.2;
 }
 
 .navbar a:hover {
@@ -47,6 +48,7 @@ img#logo:hover {
 
 .texture {
   background-image: url(assets/background.svg);
+  filter: opacity(40%);
   background-size: cover;
   width: 100%;
   height: 100%;
@@ -55,10 +57,10 @@ img#logo:hover {
   align-items: center;
   flex-direction: column;
 }
-.texture h1 {
+#home h1 {
   font-weight: 100;
-  letter-spacing: 0.5px;
-  font-size: 8px;
+  letter-spacing: -0.5px;
+  font-size: 16px;
 }
 
 div.animated-background {
@@ -67,14 +69,14 @@ div.animated-background {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(270deg, #1e3c72, #1b639e, #0c5a6b, #2193b0);
-  background-size: 800% 800%;
-  animation: gradientAnimation 10s ease infinite;
+background: linear-gradient(270deg, #0b132b, #1c2541, #1a3a6b, #2c3e50, #4a6fa5, #2a6f97, #5bc0be, #4a8ab8, #0197f6, #8db9d8, #3cc3f5);
+  background-size: 1000% 1000%;
+  animation: gradientAnimation 60s ease infinite;
 }
 
 .image-effect {
   height: 100px;
-  animation: pulse 3s ease-in-out infinite;
+  animation: pulse 10s ease-in-out infinite;
 }
 
 @keyframes pulse {
@@ -162,15 +164,15 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
 }
 
-.other h2, p {
+.other h2,
+p {
   margin-right: 30px;
 }
 
-.other button{
-  padding: 6px ;
+.other button {
+  padding: 6px;
   border-radius: 4px;
   cursor: pointer;
   transition: 200ms;
@@ -180,17 +182,15 @@ textarea {
   font-size: 16px;
 }
 
-
-
-.other #pdf{
+.other #pdf {
   background-image: url(/assets/export-pdf.svg);
   background-size: 100%;
   padding: 24px;
-  fill: #FFF;
+  fill: #fff;
 }
 
-.other button:hover{
- background-color: #0c5a6b;
+.other button:hover {
+  background-color: #0c5a6b;
 }
 
 #result,
