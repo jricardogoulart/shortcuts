@@ -1,0 +1,60 @@
+/* Fonte base */
+body { font-family: 'Inter', sans-serif; }
+
+/* Gradiente animado */
+.animated-gradient {
+  background: linear-gradient(270deg,#0b132b,#1c2541,#1a3a6b,#2c3e50,#4a6fa5,#2a6f97,#5bc0be,#4a8ab8,#0197f6,#8db9d8,#3cc3f5);
+  background-size: 1000% 1000%;
+  animation: gradientAnimation 60s ease infinite;
+}
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Efeito pulse da imagem */
+.image-pulse { animation: pulse 10s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+/* A4 */
+#a4-container {
+  width: 210mm;
+  height: 297mm;
+  background: #fff;
+  margin: auto;
+  padding: 15mm;  /* margem interna opcional */
+  box-sizing: border-box;
+  overflow: hidden; /* impede conteúdo de "vazar" */
+  position: relative;
+}
+
+/* Cabeçalho preto arredondado */
+.header-preto {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100px;
+  background: #000; color: #fff; border-radius: 0 0 100px 100px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; z-index: 5;
+}
+.header-spacer { height: 100px; }
+.titulo-silk { font-size: 1.4rem; font-weight: 700; }
+.header-info { font-size: 1rem; font-weight: 500; }
+
+footer img {
+  max-width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Marca d'água — corrigido caminho para pasta assets */
+.watermark-container {
+    position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url("/assets/watermarkrraimundo.svg");
+  background-repeat: repeat;
+  background-size: 900px auto; /* ajuste o tamanho do SVG */
+  opacity: 0.03; /* transparência da marca d’água */
+  pointer-events: none;
+}
