@@ -1,24 +1,38 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   // Navegação de seções
-  const navbar = document.getElementById('navbar');
-  const contents = document.querySelectorAll('.content');
+  const navbar = document.getElementById("navbar");
+  const contents = document.querySelectorAll(".content");
 
   function showContent(id) {
-    contents.forEach(c => c.classList.add('hidden'));
+    contents.forEach((c) => c.classList.add("hidden"));
     const target = document.getElementById(id);
-    if (target) target.classList.remove('hidden');
+    if (target) target.classList.remove("hidden");
   }
 
-  navbar.addEventListener('click', (e) => {
+  navbar.addEventListener("click", (e) => {
     const el = e.target;
-    if ((el.matches('a, img')) && el.dataset.target) {
+    if (el.matches("a, img") && el.dataset.target) {
       e.preventDefault();
       showContent(el.dataset.target);
     }
   });
 
+  navbar.addEventListener("click", (e) => {
+    const el = e.target;
+    if (el.matches("a, img") && el.dataset.target) {
+      e.preventDefault();
+      showContent(el.dataset.target);
+
+      // se saiu da seção "desenvolvimento", esconde o documento
+      if (el.dataset.target !== "desenvolvimento") {
+        const docSection = document.getElementById("document-section");
+        if (docSection) docSection.classList.add("hidden");
+      }
+    }
+  });
+
   // Seção inicial
-  showContent('home');
+  showContent("home");
 
   // -------- Mesclar PDFs --------
   const pdfForm = document.getElementById("pdfForm");
@@ -35,10 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const bytes = await file.arrayBuffer();
         const doc = await PDFLib.PDFDocument.load(bytes);
         const pages = await pdfDoc.copyPages(doc, doc.getPageIndices());
-        pages.forEach(p => pdfDoc.addPage(p));
+        pages.forEach((p) => pdfDoc.addPage(p));
       }
       const pdfBytes = await pdfDoc.save();
-      const uri = URL.createObjectURL(new Blob([pdfBytes], { type: "application/pdf" }));
+      const uri = URL.createObjectURL(
+        new Blob([pdfBytes], { type: "application/pdf" })
+      );
       document.getElementById("result").innerHTML = `
         <div class="w-full flex justify-center mb-4">
           <a href="${uri}" download="pdf-mesclado.pdf"
@@ -53,17 +69,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // -------- Orçamento --------
   let unidadeSelecionada = "Par";
-
-  document.querySelectorAll("#unidade-group button").forEach(btn => {
+  // Marca o botão inicial
+  const btnPar = document.querySelector(
+    '#unidade-group button[data-unidade="Par"]'
+  );
+  if (btnPar) {
+    btnPar.classList.add("bg-blue-600", "text-white", "shadow");
+  }
+  document.querySelectorAll("#unidade-group button").forEach((btn) => {
     btn.addEventListener("click", () => {
       unidadeSelecionada = btn.dataset.unidade;
-      document.querySelectorAll("#unidade-group button")
-        .forEach(b => b.classList.remove("bg-blue-600", "text-white", "shadow"));
+
+      document
+        .querySelectorAll("#unidade-group button")
+        .forEach((b) =>
+          b.classList.remove("bg-blue-600", "text-white", "shadow")
+        );
+
       btn.classList.add("bg-blue-600", "text-white", "shadow");
 
-      const sufixo = (unidadeSelecionada === "Unidade") ? "estampada" : "estampado";
+      const sufixo =
+        unidadeSelecionada === "Unidade" ? "estampada" : "estampado";
       document.getElementById("label-unidade").textContent = unidadeSelecionada;
-      document.getElementById("doc-valor-par-label").textContent = `Valor por ${unidadeSelecionada} ${sufixo}:`;
+      document.getElementById(
+        "doc-valor-par-label"
+      ).textContent = `Valor por ${unidadeSelecionada} ${sufixo}:`;
     });
   });
 
@@ -80,7 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const mq = parseInt(document.getElementById("matriz-qtd").value) || 0;
       const mt = mv * mq;
 
-      const gv = parseFloat(document.getElementById("gravacao-valor").value) || 0;
+      const gv =
+        parseFloat(document.getElementById("gravacao-valor").value) || 0;
       const gq = parseInt(document.getElementById("gravacao-qtd").value) || 0;
       const gt = gv * gq;
 
@@ -106,7 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
       setText("doc-gravacao-total", "R$ " + gt.toFixed(2));
 
       const docDevTotal = document.getElementById("doc-desenvolvimento-total");
-      if (docDevTotal) docDevTotal.innerHTML = `<strong>R$ ${devTotal.toFixed(2)}</strong>`;
+      if (docDevTotal)
+        docDevTotal.innerHTML = `<strong>R$ ${devTotal.toFixed(2)}</strong>`;
 
       setText("doc-valor-par", "R$ " + vp.toFixed(2));
 
@@ -114,11 +146,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const fileInput = document.getElementById("imagem-desenvolvimento");
       if (fileInput && fileInput.files && fileInput.files[0]) {
         const reader = new FileReader();
-        reader.onload = e => {
+        reader.onload = (e) => {
           const img = document.getElementById("doc-imagem");
           if (img) img.src = e.target.result;
         };
         reader.readAsDataURL(fileInput.files[0]);
+      }
+
+      // Define o sufixo correto
+      const sufixo =
+        unidadeSelecionada === "Unidade" ? "estampada" : "estampado";
+
+      // Atualiza legenda no documento
+      const docLabelUnidade = document.getElementById("doc-label-unidade");
+      if (docLabelUnidade) {
+        docLabelUnidade.textContent = `${unidadeSelecionada} ${sufixo}`;
       }
 
       // Exibe documento e habilita download
@@ -128,7 +170,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const downloadBtn = document.getElementById("download-pdf");
       if (downloadBtn) {
         downloadBtn.disabled = false;
-        downloadBtn.classList.remove("bg-gray-400", "opacity-60", "cursor-not-allowed");
+        downloadBtn.classList.remove(
+          "bg-gray-400",
+          "opacity-60",
+          "cursor-not-allowed"
+        );
         downloadBtn.classList.add("bg-green-600", "hover:bg-green-700");
       }
     });
@@ -138,14 +184,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const downloadBtn = document.getElementById("download-pdf");
   if (downloadBtn) {
     downloadBtn.addEventListener("click", async () => {
-      const silk = document.getElementById("silk").value.trim().replace(/\s+/g, "_");
-      const cliente = document.getElementById("cliente").value.trim().replace(/\s+/g, "_");
-      const dataHoje = new Date().toLocaleDateString("pt-BR").replace(/\//g, "-");
+      const silk = document
+        .getElementById("silk")
+        .value.trim()
+        .replace(/\s+/g, "_");
+      const cliente = document
+        .getElementById("cliente")
+        .value.trim()
+        .replace(/\s+/g, "_");
+      const dataHoje = new Date()
+        .toLocaleDateString("pt-BR")
+        .replace(/\//g, "-");
       const fileName = `Orcamento-${silk}(${cliente})-${dataHoje}.pdf`;
 
       const { jsPDF } = window.jspdf;
       const element = document.getElementById("a4-container");
-      if (!element) return alert("Não foi possível gerar o PDF. Verifique o HTML.");
+      if (!element)
+        return alert("Não foi possível gerar o PDF. Verifique o HTML.");
 
       const canvas = await html2canvas(element, { scale: 3, useCORS: true });
       const imgData = canvas.toDataURL("image/png", 1.0);
@@ -160,8 +215,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // -------- Funções para Referências --------
-  function generateReferences() {
-    const input = document.getElementById("referencesInput").value.toUpperCase();
+  const generateReferences = () => {
+    const input = document
+      .getElementById("referencesInput")
+      .value.toUpperCase();
     const lines = input.split("\n");
     let allReferences = "";
     let previousReference = "";
@@ -175,29 +232,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (start <= end) {
           if (allReferences && previousReference !== reference) {
-            allReferences += "\n\n"; // Adiciona duas quebras de linha entre diferentes referências
+            allReferences += "\n\n"; // duas quebras entre refs diferentes
           }
-
           for (let i = start; i <= end; i++) {
             allReferences += `${reference} - ${i}\n`;
           }
-
           previousReference = reference;
         }
       }
     });
 
     document.getElementById("output").textContent = allReferences.trim();
-  }
+  };
 
-  function copyToClipboard() {
+  const copyToClipboard = () => {
     const text = document.getElementById("output").textContent;
     const textarea = document.createElement("textarea");
-    textarea.value = text.replace(/\n/g, "\r\n"); // Preserva as quebras de linha ao copiar
+    textarea.value = text.replace(/\n/g, "\r\n"); // preserva quebra de linha
     document.body.appendChild(textarea);
     textarea.select();
     document.execCommand("copy");
     document.body.removeChild(textarea);
     alert("Todas as referências foram copiadas!");
-  }
+  };
+
+  // Eventos dos botões
+  const btnGen = document.getElementById("generateReferences");
+  if (btnGen) btnGen.addEventListener("click", generateReferences);
+
+  const btnCopy = document.getElementById("copyBtn");
+  if (btnCopy) btnCopy.addEventListener("click", copyToClipboard);
 });
